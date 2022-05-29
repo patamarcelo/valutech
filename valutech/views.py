@@ -2,6 +2,12 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
+from django.views.generic import TemplateView, View
+
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+from .settings import LOGIN_URL
 class CustomAuthToken(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
@@ -17,8 +23,19 @@ class CustomAuthToken(ObtainAuthToken):
             'first_name' : user.first_name.title(),
             'is_staff': user.is_staff,
             'is_superuser': user.is_superuser,
-            # 'image': request.build_absolute_uri(user.image.url),
+            'image': request.build_absolute_uri(user.image.url),
             'last_name' : user.last_name.title(),
             'api_key': user.api_key,
             'api_secret' : user.api_secret,
         })
+
+
+class IndexView(TemplateView):
+    template_name = 'index.html'
+
+class LogoutView(View):
+    template_name = 'index.html'
+
+    def get(self, request):
+        logout(request)
+        return redirect('index')

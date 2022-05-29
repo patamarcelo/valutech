@@ -17,19 +17,23 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from rest_framework.authtoken.views import obtain_auth_token
-from .views import CustomAuthToken
+from .views import CustomAuthToken, IndexView, LogoutView
 
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', IndexView.as_view(), name="index"),
+    path("logout/", LogoutView.as_view(), name="logout"),
+    path('sistem/', admin.site.urls),
     path('usuario/', include('usuario.urls')),
     path('api/', include('api.urls')),
     path('auth/', CustomAuthToken.as_view()),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+
 
 
 

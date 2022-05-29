@@ -8,16 +8,17 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.core.files.storage import FileSystemStorage
 from django.db.models import FileField
 
+import os
 
-
-
-def get_file_path(instance, filename):
-    stor = FileSystemStorage()
-    f = FileField(storage=stor)
+def get_file_path(instance, filename):    
     ext       = filename.split('.')[-1]
+    name      = filename.split('.')[0]
     date_file = datetime.datetime.now().strftime('%Y%m%d')
-    file_name  = f'api-binance-django-mp/{instance.first_name}/{date_file}_{str(uuid.uuid4())[:8]}.{ext}'
-    return f.generate_filename(None, file_name)
+    user_name = instance.first_name.lower() if instance.first_name else ''
+    filename = f'users/{user_name}_{date_file}_{name}_{str(uuid.uuid4())[:8]}.{ext}'
+    return filename
+
+
 
 class UsuarioManager(BaseUserManager):
 
@@ -60,7 +61,8 @@ class CustomUsuario(AbstractUser):
     last_name  = models.CharField('Last Name', max_length=15)
     last_name  = models.CharField('Last Name', max_length=15)
     is_staff   = models.BooleanField('Membro da equipe', default=False)
-    image      = models.ImageField(upload_to='images/', default='images/User1.jpg', blank=True)
+    # image      = models.ImageField(storage=DropBoxStorage(), default='images/User1.jpg', blank=True)
+    image      = models.ImageField(upload_to=get_file_path, default='images/User1.jpg', blank=True)
     
     api_key    = models.CharField('Api Key', max_length=200, blank=True, null=True)
     api_secret = models.CharField('Api Secret', max_length=200, blank=True, null=True)
