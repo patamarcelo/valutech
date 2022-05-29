@@ -5,7 +5,7 @@ charset-normalizer==2.0.12
 dj-database-url==0.5.0
 Django==4.0.4
 # django-adminlte3==0.1.7
--e git+git://github.com/patamarcelo/django-adminlte3.git#egg=django-adminlte3
+git+git://github.com/patamarcelo/django-adminlte3.git#egg=django-adminlte3
 django-cors-headers==3.12.0
 django-heroku==0.3.1
 django-storages==1.12.3
