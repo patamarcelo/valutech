@@ -4,7 +4,8 @@ certifi==2022.5.18.1
 charset-normalizer==2.0.12
 dj-database-url==0.5.0
 Django==4.0.4
-git+git://github.com/d-demirci/django-adminlte3.git#egg=django-adminlte3
+django-adminlte-3==0.1.6
+-e git+https://github.com/d-demirci/django-adminlte3.git@36a2391b5f2cd441497133d7190cfb822f2e9628#egg=django_adminlte3
 django-cors-headers==3.12.0
 django-heroku==0.3.1
 django-storages==1.12.3
