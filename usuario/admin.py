@@ -11,7 +11,8 @@ class CustomUsuarioAdmin(UserAdmin):
     add_form = CustomUsuarioCreationForm
     form = CustomUsuarioChangeForm
     model = CustomUsuario
-    list_display = ('first_name','last_name','email','fone', 'is_staff', 'is_active')
+    list_display = ('first_name','last_name','email','fone', 'is_staff', 'is_active', 'image_tag')
+    readonly_fields = ('image_tag',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Informações pessoais', {'fields': ('first_name', 'last_name', 'fone')}),
@@ -20,3 +21,5 @@ class CustomUsuarioAdmin(UserAdmin):
         ('Outros', { 'fields': ('image',)}),
         ('Binance API', {'fields': ('api_secret', 'api_key')}),
     )
+
+    

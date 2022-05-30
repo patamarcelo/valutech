@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 import uuid
 
+from django.utils.html import mark_safe
 
 # from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser, BaseUserManager
@@ -70,7 +71,12 @@ class CustomUsuario(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'fone']
     
-
+    def image_tag(self):
+        from django.utils.html import escape
+        # return u'<img src="%s" />' % escape(self.image)
+        return mark_safe('<img src="%s" width="50" height="50" border-radius="10" />' % (self.image.url))
+    image_tag.short_description = 'Foto'
+    image_tag.allow_tags = True
     
 
 
