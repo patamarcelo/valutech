@@ -8,7 +8,7 @@ dj-database-url==0.5.0
 -e git+https://github.com/patamarcelo/django-adminlte3.git#egg=django-adminlte3
 django-cors-headers==3.12.0
 django-heroku==0.3.1
-django-storages==1.12.3
+-e git+https://github.com/patamarcelo/django-storages.git#egg=django-storages
 djangorestframework==3.13.1
 dropbox==11.31.0
 gunicorn==20.1.0
