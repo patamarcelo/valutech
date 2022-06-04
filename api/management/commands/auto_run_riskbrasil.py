@@ -65,7 +65,7 @@ class Command(BaseCommand):
             print(len(query_list))
             count = 0
             list_obj = []
-            for i in query_list:
+            for i in query_list[1:]:
                 data_value = i['Data']
                 abertura = float(i['Abertura'].replace(',', '.'))
                 fechamento = float(i['Fechamento'].replace(',', '.'))
