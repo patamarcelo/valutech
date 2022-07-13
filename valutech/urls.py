@@ -28,6 +28,7 @@ urlpatterns = [
     path("sistem/", admin.site.urls),
     path("usuario/", include("usuario.urls")),
     path("api/", include("api.urls")),
+    path("npproject/", include("npproject.urls")),
     path("auth/", CustomAuthToken.as_view()),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
