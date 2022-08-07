@@ -34,6 +34,8 @@ import base64
 import tempfile
 from django.http import FileResponse
 
+from .python_programs.alterna_date import generate_random_cal
+from .python_programs.google_api import related_queries
 
 class NpViewSet(viewsets.ModelViewSet):
     queryset = NpData.objects.all()
@@ -63,3 +65,27 @@ class NpViewSet(viewsets.ModelViewSet):
         else:
             response = {"message": "Você precisa estar logado!!!"}
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False)
+    def random_cal(self, request):
+        if(request.method == 'GET'):
+            data = generate_random_cal()
+            print(data)
+            response = {"data": data}
+            return Response(response, status=status.HTTP_200_OK)
+        
+        
+    @action(detail=True, methods=["POST"])
+    def get_related_query(self, request, pk=None):
+        if request.user.is_authenticated:
+            if(request.method == 'POST'):
+                user_id = request.user.id
+                user    = User.objects.get(id=user_id)
+                data    = json.dumps(request.data)
+                data = json.loads(data)
+                keyword   = data['keyword']
+                print(keyword)
+                data = related_queries(keyword)
+                response = {"data": data}
+                return Response(response, status=status.HTTP_200_OK)
+            
