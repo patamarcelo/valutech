@@ -16,6 +16,12 @@ import dj_database_url
 from decouple import config
 
 
+try:
+    from .local_settings import *
+except ImportError:
+    print('Dados de local_settings não importados!!!')
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -164,11 +170,6 @@ if DEBUG == False:
     DROPBOX_APP_SECRET = config('DROPBOX_APP_SECRET', default='')
     DROPBOX_APP_KEY = config('DROPBOX_APP_KEY', default='')
 
-
-try:
-    from .local_settings import *
-except ImportError:
-    print('Dados de local_settings não importados!!!')
 
 
 # Static files (CSS, JavaScript, Images)
