@@ -4,3 +4,5 @@ valutech/local_settings.py
 api/__pycache__
 valutech/__pycache__
 usuario/__pycache__
+
+.env
