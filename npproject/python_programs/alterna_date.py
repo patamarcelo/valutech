@@ -92,7 +92,6 @@ def generate_random_cal():
                  for i in range(dead_line)]
     print('\n')
 
-
     final_list = []
     for i in list_date:
         days = mix_all_days(i, get_random_posts(4))
@@ -119,3 +118,9 @@ def generate_random_cal():
         final_result.append(new_dict)
 
     return final_result
+
+
+if __name__ == '__main__':
+    resultado = generate_random_cal()
+    for i in resultado:
+        print(i)
