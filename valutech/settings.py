@@ -176,6 +176,8 @@ if DEBUG == False:
     DROPBOX_APP_SECRET = env('DROPBOX_APP_SECRET', default='')
     DROPBOX_APP_KEY = env('DROPBOX_APP_KEY', default='')
 
+CSRF_TRUSTED_ORIGINS = ["https://valutech.up.railway.app"]
+
 
 
 # Static files (CSS, JavaScript, Images)
