@@ -47,18 +47,19 @@ DEBUG = config('DEBUG', cast=bool, default=False)
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+DATABASE_URL = config("DATABASE_URL")
 
-
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-"""
+else:
+    DATABASES = {"default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)}
+    
 
-DATABASES = {"default": dj_database_url.config()}
 
 
 
@@ -171,9 +172,9 @@ DROPBOX_ROOT_PATH = '/'
 
 # VAR SAVED ON HEROKU
 if DEBUG == False:
-    DROPBOX_OAUTH2_REFRESH_TOKEN = config('DROPBOX_OAUTH2_REFRESH_TOKEN', default='')
-    DROPBOX_APP_SECRET = config('DROPBOX_APP_SECRET', default='')
-    DROPBOX_APP_KEY = config('DROPBOX_APP_KEY', default='')
+    DROPBOX_OAUTH2_REFRESH_TOKEN = env('DROPBOX_OAUTH2_REFRESH_TOKEN', default='')
+    DROPBOX_APP_SECRET = env('DROPBOX_APP_SECRET', default='')
+    DROPBOX_APP_KEY = env('DROPBOX_APP_KEY', default='')
 
 
 
